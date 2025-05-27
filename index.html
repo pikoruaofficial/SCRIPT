@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Internal Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --indigo: #1a2332;
+            --teal: #2dd4bf;
+            --gray: #f3f4f6;
+            --slate: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--indigo);
+            color: var(--gray);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--indigo);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+
+        .loading-logo {
+            width: 150px;
+            animation: pulse 2s infinite;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            margin-top: 2rem;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--teal);
+            animation: load 3.5s ease-out forwards;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: var(--indigo);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(45,212,191,0.1);
+        }
+
+        .header-logo {
+            height: 40px;
+        }
+
+        /* Content Grid */
+        .main-grid {
+            margin-top: 80px;
+            padding: 2rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s;
+            border: 1px solid rgba(45,212,191,0.1);
+        }
+
+        .card-image {
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--teal);
+        }
+
+        .card-title {
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-btn {
+            background: var(--teal);
+            color: var(--indigo);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--teal);
+            font-size: 1.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 0;
+            width: 100%;
+            height: calc(100vh - 60px);
+            background: var(--indigo);
+            padding: 2rem;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .card-image {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <img src="https://via.placeholder.com/150x150.png?text=Company+Logo" class="loading-logo" alt="Loading Logo">
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <img src="https://via.placeholder.com/150x40.png?text=Company+Logo" class="header-logo" alt="Company Logo">
+        <button class="hamburger">☰</button>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu">
+        <a href="#dashboard" class="nav-link">Dashboard</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#resources" class="nav-link">Resources</a>
+        <a href="#reports" class="nav-link">Reports</a>
+        <a href="#tools" class="nav-link">Tools</a>
+        <a href="#docs" class="nav-link">Docs</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-grid">
+        <div class="card">
+            <div class="card-image">
+                <img src="https://source.unsplash.com/random/800x600?projects" alt="Projects">
+            </div>
+            <h3 class="card-title">Active Projects</h3>
+            <p>Current ongoing initiatives and status updates</p>
+            <button class="card-btn">View →</button>
+        </div>
+
+        <div class="card">
+            <div class="card-image">
+                <img src="https://source.unsplash.com/random/800x600?hr" alt="HR Portal">
+            </div>
+            <h3 class="card-title">HR Portal</h3>
+            <p>Employee benefits and policy documents</p>
+            <button class="card-btn">Access →</button>
+        </div>
+
+        <div class="card">
+            <div class="card-image">
+                <img src="https://source.unsplash.com/random/800x600?calendar" alt="Calendar">
+            </div>
+            <h3 class="card-title">Team Calendar</h3>
+            <p>Company events and schedule management</p>
+            <button class="card-btn">View →</button>
+        </div>
+
+        <div class="card">
+            <div class="card-image">
+                <img src="https://source.unsplash.com/random/800x600?IT" alt="IT Support">
+            </div>
+            <h3 class="card-title">IT Support</h3>
+            <p>Technical resources and support system</p>
+            <button class="card-btn">Access →</button>
+        </div>
+
+        <div class="card">
+            <div class="card-image">
+                <img src="https://source.unsplash.com/random/800x600?finance" alt="Finance">
+            </div>
+            <h3 class="card-title">Finance</h3>
+            <p>Budget tracking and expense reports</p>
+            <button class="card-btn">View →</button>
+        </div>
+
+        <div class="card">
+            <div class="card-image">
+                <img src="https://source.unsplash.com/random/800x600?training" alt="Training">
+            </div>
+            <h3 class="card-title">Training</h3>
+            <p>Professional development resources</p>
+            <button class="card-btn">Start →</button>
+        </div>
+    </main>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.loading-screen').remove();
+                }, 500);
+            }, 4000);
+        });
+
+        // Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
